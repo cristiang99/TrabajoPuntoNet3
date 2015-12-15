@@ -39,7 +39,10 @@ namespace sb_admin.web.Controllers
         // GET: Pedidoes/Create
         public ActionResult Create()
         {
-            ViewBag.numeroMesa = new SelectList(db.Mesa, "numeroMesa", "numeroMesa");
+            //ViewBag.numeroMesa = new SelectListItem();
+            var modelo = from p in db.Mesa where p.estado == 0 select p;
+            ViewBag.numeroMesa = new MultiSelectList(modelo, "numeroMesa", "numeroMesa");
+
             return View();
         }
 
@@ -56,7 +59,7 @@ namespace sb_admin.web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.numeroMesa = new SelectList(db.Mesa, "numeroMesa", "numeroMesa", pedido.numeroMesa);
             return View(pedido);
         }
@@ -73,7 +76,9 @@ namespace sb_admin.web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.numeroMesa = new SelectList(db.Mesa, "numeroMesa", "numeroMesa", pedido.numeroMesa);
+            var modelo = from p in db.Mesa where p.estado == 0 select p;
+            ViewBag.numeroMesa = new SelectList(modelo, "numeroMesa", "numeroMesa", pedido.numeroMesa);
+            ViewBag.cocktails = new SelectList(db.Cocktail, "idCocktail", "nombre");
             return View(pedido);
         }
 
@@ -84,9 +89,19 @@ namespace sb_admin.web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idPedido,fecha,numeroMesa,total")] Pedido pedido)
         {
+            Detalle det = new Detalle();
+            
+            string  id_producto =""+ Request.Form.GetValues("idPedido");
+            string nombre_produco = "" + Request.Form.GetValues("nombre");
+            var modelo = from p in db.Cocktail where p.nombre == nombre_produco select p.precio_v;
+            det.nombreConsumo = nombre_produco;
+            det.estado = "no pago";
+       
             if (ModelState.IsValid)
             {
                 db.Entry(pedido).State = EntityState.Modified;
+                db.SaveChanges();
+                db.Detalle.Add(det);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
