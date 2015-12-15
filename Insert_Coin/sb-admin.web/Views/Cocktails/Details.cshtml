@@ -1,0 +1,83 @@
+﻿@model sb_admin.web.Models.Cocktail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cocktail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_v)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_v)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCocktail }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

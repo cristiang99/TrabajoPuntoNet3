@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InsertCoinDBModelStoreContainer" CdmEntityContainer="InsertCoinDBEntities">
+    <EntitySetMapping Name="Cocktail">
+      <EntityTypeMapping TypeName="InsertCoinDBModel.Cocktail">
+        <MappingFragment StoreEntitySet="Cocktail">
+          <ScalarProperty Name="idCocktail" ColumnName="idCocktail" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="precio_v" ColumnName="precio_v" />
+          <ScalarProperty Name="ing1" ColumnName="ing1" />
+          <ScalarProperty Name="ing2" ColumnName="ing2" />
+          <ScalarProperty Name="ing3" ColumnName="ing3" />
+          <ScalarProperty Name="ing4" ColumnName="ing4" />
+          <ScalarProperty Name="ing5" ColumnName="ing5" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle">
+      <EntityTypeMapping TypeName="InsertCoinDBModel.Detalle">
+        <MappingFragment StoreEntitySet="Detalle">
+          <ScalarProperty Name="idDetalle" ColumnName="idDetalle" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="nombreConsumo" ColumnName="nombreConsumo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="costo" ColumnName="costo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Insumo">
+      <EntityTypeMapping TypeName="InsertCoinDBModel.Insumo">
+        <MappingFragment StoreEntitySet="Insumo">
+          <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="precio_v" ColumnName="precio_v" />
+          <ScalarProperty Name="precio_c" ColumnName="precio_c" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="stock_min" ColumnName="stock_min" />
+          <ScalarProperty Name="porcion" ColumnName="porcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mesa">
+      <EntityTypeMapping TypeName="InsertCoinDBModel.Mesa">
+        <MappingFragment StoreEntitySet="Mesa">
+          <ScalarProperty Name="numeroMesa" ColumnName="numeroMesa" />
+          <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedido">
+      <EntityTypeMapping TypeName="InsertCoinDBModel.Pedido">
+        <MappingFragment StoreEntitySet="Pedido">
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="numeroMesa" ColumnName="numeroMesa" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

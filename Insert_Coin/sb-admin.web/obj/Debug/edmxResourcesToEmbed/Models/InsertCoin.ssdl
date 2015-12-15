@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsertCoinDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cocktail">
+    <Key>
+      <PropertyRef Name="idCocktail" />
+    </Key>
+    <Property Name="idCocktail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="precio_v" Type="int" />
+    <Property Name="ing1" Type="int" />
+    <Property Name="ing2" Type="int" />
+    <Property Name="ing3" Type="int" />
+    <Property Name="ing4" Type="int" />
+    <Property Name="ing5" Type="int" />
+    <Property Name="descripcion" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Detalle">
+    <Key>
+      <PropertyRef Name="idDetalle" />
+    </Key>
+    <Property Name="idDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPedido" Type="int" />
+    <Property Name="nombreConsumo" Type="varchar" MaxLength="50" />
+    <Property Name="estado" Type="varchar" MaxLength="50" />
+    <Property Name="costo" Type="int" />
+  </EntityType>
+  <EntityType Name="Insumo">
+    <Key>
+      <PropertyRef Name="idInsumo" />
+    </Key>
+    <Property Name="idInsumo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="marca" Type="varchar" MaxLength="50" />
+    <Property Name="precio_v" Type="int" />
+    <Property Name="precio_c" Type="int" />
+    <Property Name="stock" Type="int" />
+    <Property Name="stock_min" Type="int" />
+    <Property Name="porcion" Type="int" />
+  </EntityType>
+  <EntityType Name="Mesa">
+    <Key>
+      <PropertyRef Name="numeroMesa" />
+    </Key>
+    <Property Name="numeroMesa" Type="int" Nullable="false" />
+    <Property Name="capacidad" Type="int" />
+    <Property Name="estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="numeroMesa" Type="int" />
+    <Property Name="total" Type="int" />
+  </EntityType>
+  <Association Name="fk_idPedido">
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1" />
+    <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido">
+        <PropertyRef Name="idPedido" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="idPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_numeroMesa">
+    <End Role="Mesa" Type="Self.Mesa" Multiplicity="0..1" />
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mesa">
+        <PropertyRef Name="numeroMesa" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="numeroMesa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsertCoinDBModelStoreContainer">
+    <EntitySet Name="Cocktail" EntityType="Self.Cocktail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle" EntityType="Self.Detalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Insumo" EntityType="Self.Insumo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mesa" EntityType="Self.Mesa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_idPedido" Association="Self.fk_idPedido">
+      <End Role="Pedido" EntitySet="Pedido" />
+      <End Role="Detalle" EntitySet="Detalle" />
+    </AssociationSet>
+    <AssociationSet Name="fk_numeroMesa" Association="Self.fk_numeroMesa">
+      <End Role="Mesa" EntitySet="Mesa" />
+      <End Role="Pedido" EntitySet="Pedido" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

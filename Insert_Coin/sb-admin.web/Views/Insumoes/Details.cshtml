@@ -1,0 +1,75 @@
+﻿@model sb_admin.web.Models.Insumo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Insumo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_v)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_v)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_c)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_c)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock_min)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock_min)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.porcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.porcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idInsumo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

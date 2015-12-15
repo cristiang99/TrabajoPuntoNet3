@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsertCoinDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cocktail">
+    <Key>
+      <PropertyRef Name="idCocktail" />
+    </Key>
+    <Property Name="idCocktail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="precio_v" Type="Int32" />
+    <Property Name="ing1" Type="Int32" />
+    <Property Name="ing2" Type="Int32" />
+    <Property Name="ing3" Type="Int32" />
+    <Property Name="ing4" Type="Int32" />
+    <Property Name="ing5" Type="Int32" />
+    <Property Name="descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Detalle">
+    <Key>
+      <PropertyRef Name="idDetalle" />
+    </Key>
+    <Property Name="idDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idPedido" Type="Int32" />
+    <Property Name="nombreConsumo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="costo" Type="Int32" />
+    <NavigationProperty Name="Pedido" Relationship="Self.fk_idPedido" FromRole="Detalle" ToRole="Pedido" />
+  </EntityType>
+  <EntityType Name="Insumo">
+    <Key>
+      <PropertyRef Name="idInsumo" />
+    </Key>
+    <Property Name="idInsumo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="precio_v" Type="Int32" />
+    <Property Name="precio_c" Type="Int32" />
+    <Property Name="stock" Type="Int32" />
+    <Property Name="stock_min" Type="Int32" />
+    <Property Name="porcion" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Mesa">
+    <Key>
+      <PropertyRef Name="numeroMesa" />
+    </Key>
+    <Property Name="numeroMesa" Type="Int32" Nullable="false" />
+    <Property Name="capacidad" Type="Int32" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="Pedido" Relationship="Self.fk_numeroMesa" FromRole="Mesa" ToRole="Pedido" />
+  </EntityType>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="numeroMesa" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+    <NavigationProperty Name="Detalle" Relationship="Self.fk_idPedido" FromRole="Pedido" ToRole="Detalle" />
+    <NavigationProperty Name="Mesa" Relationship="Self.fk_numeroMesa" FromRole="Pedido" ToRole="Mesa" />
+  </EntityType>
+  <Association Name="fk_idPedido">
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1" />
+    <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pedido">
+        <PropertyRef Name="idPedido" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="idPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_numeroMesa">
+    <End Role="Mesa" Type="Self.Mesa" Multiplicity="0..1" />
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mesa">
+        <PropertyRef Name="numeroMesa" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="numeroMesa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsertCoinDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cocktail" EntityType="Self.Cocktail" />
+    <EntitySet Name="Detalle" EntityType="Self.Detalle" />
+    <EntitySet Name="Insumo" EntityType="Self.Insumo" />
+    <EntitySet Name="Mesa" EntityType="Self.Mesa" />
+    <EntitySet Name="Pedido" EntityType="Self.Pedido" />
+    <AssociationSet Name="fk_idPedido" Association="Self.fk_idPedido">
+      <End Role="Pedido" EntitySet="Pedido" />
+      <End Role="Detalle" EntitySet="Detalle" />
+    </AssociationSet>
+    <AssociationSet Name="fk_numeroMesa" Association="Self.fk_numeroMesa">
+      <End Role="Mesa" EntitySet="Mesa" />
+      <End Role="Pedido" EntitySet="Pedido" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

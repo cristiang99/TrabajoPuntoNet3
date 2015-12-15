@@ -1,0 +1,70 @@
+﻿@model IEnumerable<sb_admin.web.Models.Insumo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio_v)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio_c)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock_min)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.porcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio_v)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio_c)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock_min)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.porcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idInsumo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idInsumo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idInsumo })
+        </td>
+    </tr>
+}
+
+</table>
